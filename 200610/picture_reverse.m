@@ -1,13 +1,11 @@
-%小孩
-I1=imread('kid.jpg');
+I1=imread('test.png');
 g1=rgb2gray(I1);
 s=fftshift(fft2(g1));
 [M,N]=size(s);
 n1=fix(M/2);
 n2=fix(N/2);
 
-%理想低通滤波器取d0=10  （15,30）可变
-d0=10;
+d0=10;                                                                                                
 for i=1:M
     for j=1:N
         d=sqrt((i-n1)^2+(j-n2)^2);
@@ -24,17 +22,14 @@ s=uint8(real(ifft2(s)));
 figure(1);
 imshow(s);
 
-
-%老人
-I2=imread('elder.jpg');
+I2=imread('test.png');
 g2=rgb2gray(I2);
 s2=fftshift(fft2(g2));
 [M2,N2]=size(s2);
 n12=fix(M2/2);
 n22=fix(N2/2);
 
-%理想高通滤波器取d02=5  （15,30）可变
-d02=10;
+d02=5;
 for i=1:M2
     for j=1:N2
         d=sqrt((i-n12)^2+(j-n22)^2);
@@ -50,9 +45,3 @@ s2=ifftshift(s2);
 s2=uint8(real(ifft2(s2)));
 figure(2);
 imshow(s2);
-
-%图片合并
-s3=imadd(s,s2);
-figure(3);
-imshow(s3);
-imwrite(s3,'final.jpg','JPG')
